@@ -1,6 +1,7 @@
 body
 {
 	background-color: #303030;
+	font-family: 'Lato', sans-serif;
 }
 
 #container
@@ -27,9 +28,9 @@ body
 	
 }
 
-#login_data
+#registration_data
 {
-	margin-top: 50px;
+	margin-top: 25px;
 	color: white;
 	float: left;
 	width: 800px;

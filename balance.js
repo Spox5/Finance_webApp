@@ -36,7 +36,7 @@ function showCurrentMonth()
 
 			cell = row.insertCell(0);
 			cell.setAttribute("class", "rowItem");
-			textNode = document.createTextNode("Praca");
+			textNode = document.createTextNode("Przykładowa kategoria");
 			cell.appendChild(textNode);
 			
 			cell = row.insertCell(1);
