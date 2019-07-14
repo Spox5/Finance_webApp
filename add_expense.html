@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<title>AddExpense</title>
+	
+	<link rel="stylesheet" href="style_add_expense.css" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap&subset=latin-ext" rel="stylesheet">
+	
+</head>
+
+<body>
+	<div id="container">
+		<div id="title">
+			<h1>Dodaj przychód</h1>
+		</div>
+		
+		<div class="rectangle"></div>
+		
+		<div id="scoitaner">
+			
+			Kwota: <input type="text" id="field"/>
+			Data: <input type="text" id="field"/><br/><br/>
+			Sposób płatności:<br/>
+			<input type="radio" name="payment_method" value="cash">Gotówka
+			<input type="radio" name="payment_method" value="debet_card">Karta debetowa
+			<input type="radio" name="payment_method" value="credit_card">Karta kredytowa<br/><br/>
+			Kategoria:<br/>
+			<input type="radio" name="category" value="food">Jedzenie
+			<input type="radio" name="category" value="flat">Mieszkanie
+			<input type="radio" name="category" value="transport">Transport
+			<input type="radio" name="category" value="telecommunication">Telekomunikacja<br/>				
+			<input type="radio" name="category" value="healthcare">Opieka zdrowotna
+			<input type="radio" name="category" value="clothes">Ubrania
+			<input type="radio" name="category" value="hygiene">Higiena
+			<input type="radio" name="category" value="children">Dzieci<br/>
+			<input type="radio" name="category" value="entertainment">Rozrywka
+			<input type="radio" name="category" value="trip">Wycieczka
+			<input type="radio" name="category" value="training">Szkolenia
+			<input type="radio" name="category" value="books">Książki<br/>			<input type="radio" name="category" value="savings">Oszczędności
+			<input type="radio" name="category" value="pension">Na złotą jesień, czyli emeryturę<br/>
+			<input type="radio" name="category" value="dept">Spłata długów
+			<input type="radio" name="category" value="donation">Darowizna
+			<input type="radio" name="category" value="other">Inne wydatki<br/><br/>
+			Komentarz (opcjonalnie)<br/><input type="text" id="field"/><br/><br/>
+			<input type="submit" value="Dodaj" onclick="wypisz()"/>
+			<input type="submit" value="Anuluj" onclick="wypisz()"/>
+		</div>
+		
+		<div class="rectangle"></div>
+		
+		<div id="footer">Prowadzenie budżetu osobistego &copy; Wszelkie prawa zastrzeżone</div>
+	</div>
+	
+	
+</body>
+</html>

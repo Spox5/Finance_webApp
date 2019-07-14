@@ -1,0 +1,112 @@
+body
+{
+	background-color: #303030;
+}
+
+#container
+{
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#title
+{
+	color: white;
+	text-align: center;
+	border-style: solid;
+	border-color: white;
+}
+
+.rectangle
+{
+	background-color: #0d2954;
+	width: 100px;
+	float: left;
+	min-height: 450px;
+	
+}
+
+#tiles
+{
+	float: left;
+	width: 800px;
+}
+
+.tile1
+{
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 50px;
+	width: 400px;
+	background-color: #3095d3;
+	text-align: center;
+	font-size: 30px;
+	border-radius: 5px;
+}
+
+.tile2
+{
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+	width: 400px;
+	background-color: #666666;
+	text-align: center;
+	font-size: 30px;
+	border-radius: 5px;
+}
+
+.tile3
+{
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+	width: 400px;
+	background-color: #93c748;
+	text-align: center;
+	font-size: 30px;
+	border-radius: 5px;
+}
+
+.tile4
+{
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+	width: 400px;
+	background-color: #ee5a32;
+	text-align: center;
+	font-size: 30px;
+	border-radius: 5px;
+}
+
+.tile5
+{
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+	width: 400px;
+	background-color: #f5e042;
+	text-align: center;
+	font-size: 30px;
+	border-radius: 5px;
+}
+
+a.tilelink
+{
+	color: #ffffff;
+	text-decoration: none;
+	display: block;
+	width: 400px;
+	padding: 10px;
+}
+
+#footer
+{
+	background-color: black;
+	text-align: center;
+	color: white;
+	clear: both;
+	padding: 10px;
+}	
