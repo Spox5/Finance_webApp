@@ -97,6 +97,7 @@ body
 	border-style: dashed;
 	float: left;
 	margin-right: 5px;
+	margin-bottom: 10px;
 }
 
 #table2
@@ -104,12 +105,49 @@ body
 	color: #ffffff;
 	border-style: dashed;
 	float: left;
+	margin-bottom: 10px;
 }		
+
+#table3
+{
+	color: #ffffff;
+	border-style: dashed;
+	float: left;
+	margin-right: 5px;
+}
+
+#table4
+{
+	color: #ffffff;
+	border-style: dashed;
+	float: left;
+}
 
 #piechart
 {
-	margin-left: 250px;
+	margin-left: 170px;
 	margin-top: 50px;
+}
+
+#sum
+{
+	color: white;
+	font-size: 40px;
+	text-align: center;
+}
+
+#sum:hover {text-align: center;}
+
+#sum:hover span.good{display: none;}
+
+#sum:hover span.bad{display: inline-block;}
+
+span.good {background-color: green;}
+
+span.bad
+{
+	display: none;
+	background-color: red;
 }
 
 #footer
@@ -119,4 +157,5 @@ body
 	color: white;
 	clear: both;
 	padding: 10px;
+	margin-top: 40px;
 }	

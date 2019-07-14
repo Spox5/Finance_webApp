@@ -8,6 +8,7 @@
 	
 	<link rel="stylesheet" href="style_balance.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap&subset=latin-ext" rel="stylesheet">
+	
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="balance.js"></script>
 	
@@ -18,9 +19,12 @@
 <body>
 
 	<div id="container">
+	<header>
 		<div id="title">
 			<h1>Bilans</h1>
 		</div>
+	</header>
+	<nav>
 		<div class="dropdown" style="float:right">
 			<button onclick="showMenu()" id="dropbtn" >Wybierz okres</button>
 			<div id="dropdownbalance" class="dropdown-content">
@@ -28,12 +32,13 @@
 				<a href="#">Poprzedni miesiąc</a>
 				<a href="#">Bieżący rok</a>
 				<div id="other">Niestandardowe
-					<div font-size="10" id="putDate">Podaj zakres: </div>
+					<div font-size="10" id="putDate">Podaj zakres dat: </div>
 					<input type="text" id="pole1"/>
 					<input type="submit" value="Zatwierdź"/>
 				</div>
 			</div>
 		</div>
+	</nav>
 		
 		<table id="table1" width="395" border="3" cellpadding="10" bordercolor="white"  >
 			<tr>
@@ -54,11 +59,42 @@
 				<td class="rowItem" width="100" align="center">Wysokość</td>
 			</tr>
 		</table>
+		
 		<div style="clear:both"></div>
+		
+		<table id="table3" width="395" border="3" cellpadding="10" bordercolor="white"  >
+			<tr>
+				<td class="rowItem" colspan="2" align="center">Suma</td>
+			</tr>
+			<tr>
+				<td class="rowItem" width="300" align="center">Kategoria</td>
+				<td class="rowItem" width="100" align="center">Wysokość</td>
+			</tr>
+		</table>
+		
+		<table id="table4" width="395" border="3" cellpadding="10" bordercolor="white"  >
+			<tr>
+				<td class="rowItem" colspan="2" align="center">Suma</td>
+			</tr>
+			<tr>
+				<td class="rowItem" width="300" align="center">Kategoria</td>
+				<td class="rowItem" width="100" align="center">Wysokość</td>
+			</tr>
+		</table>
+		
+		<div style="clear:both"></div>
+		
 		<div id="piechart"></div>
+		
+		<div id="sum">Podsumowanie bilansu:<br />
+			<span class="good">Gratulacje, świetnie zarządzasz finansami</span>
+			<span class="bad">Uwaga, popadasz w długi</span>
+		</div>
 	</div>
 	
-	<div id="footer">Prowadzenie budżetu osobistego &copy; Wszelkie prawa zastrzeżone</div>
+	<footer>
+		<div id="footer">Prowadzenie budżetu osobistego &copy; Wszelkie prawa zastrzeżone</div>
+	</footer>
 
 </body>
 </html>
