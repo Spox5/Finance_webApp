@@ -1,0 +1,310 @@
+body
+{
+	background-color: #F5F5F5;
+	font-family: 'Lato', sans-serif;
+	color: black;
+	margin: 0 !important;
+}
+
+.header
+{
+	width: 100%;
+	padding: 30px 0;
+	background-color: #303030;
+	color: white;
+}
+
+.logo
+{
+	width: 500px;
+	font-size: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	letter-spacing: 2px;
+}
+
+#container
+{
+	width: 1000px;
+	min-height: 400px;
+	margin-top: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 15px;
+	text-align: center;
+}
+
+#container #title
+{
+	font-size: 30px;
+	color: #0066ff;
+}
+
+.log_form
+{
+	font-size: 30px;
+	margin-top: 20px;
+	width: 500px;
+	float: left;
+	text-align: center;
+}
+
+.nav
+{
+	width: 100%;
+	padding: 10px 0;
+	background-color: grey;
+	text-align: center;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	transition: background-color 0.2s ease-in-out;
+}
+
+ol
+{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	font-size: 18px;
+	height: 35px;
+	line-height: 200%;
+	display: inline-block;
+	transition: background-color 0.2s ease-in-out;
+}
+
+ol a
+{
+	color: white;
+	text-decoration: none;
+	display: block;
+}
+
+ol > li
+{
+	float: left;
+	width: 200px;
+	height: 40px;
+	border-right: 1px dashed black;
+	transition: background-color 0.2s ease-in-out;
+}
+
+ol > li:first-child
+{
+	border-left: 1px dashed black; 
+}
+
+ol > li:hover
+{
+	background-color: white;
+}
+
+ol > li a {transition: color 0.2s ease-in-out;}
+
+ol > li:hover > a
+{
+	color: black;
+}
+
+.pic
+{
+	margin-top: 30px;
+	margin-left: 200px;
+	width: 400px;	
+	float: left;
+	border-radius: 5px;
+	border-color: #0066ff;
+	border-style: solid;
+	border-width: 1px;
+}
+#welcome 
+{
+	float: left;
+	width: 500px;
+	margin-top: 90px;
+	margin-left: 50px;
+	font-size: 50px;
+	text-align: center;
+	color: #0066ff;
+	
+}
+
+#welcome div div
+{
+	margin-top: 30px;
+	font-size: 20px;
+}
+
+fieldset
+{
+	margin-top: 20px;
+	border: none;
+}
+
+legend
+{
+	font-size: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"]
+{
+	width: 300px;
+	background-color: #efefef;
+	color: #666666;
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	font-size: 17px;
+	padding: 5px;
+	box-sizing: border-box;
+	outline: none;
+	margin-top: 15px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus
+{
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.75);
+	-moz-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.75);
+	box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.75);
+	border: 2px solid #a5cda5;
+	background-color: #e9f3e9;
+	color: #428c42;
+}
+
+input[class="register"]
+{
+	width: 300px;
+	background-color: #00b33c;
+	font-size: 20px;
+	color: white;
+	padding: 15px 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 1px;
+	outline: none;
+	margin-top: 30px;
+	transition: background-color 0.2s ease-in-out;
+}
+
+input[class="register"]:hover
+{
+	background-color: #00cc44;
+}
+
+input[class="login"]
+{
+	width: 300px;
+	background-color: #0066ff;
+	font-size: 20px;
+	color: white;
+	padding: 15px 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 1px;
+	outline: none;
+	margin-top: 30px;
+	transition: background-color 0.2s ease-in-out;
+}
+
+input[class="login"]:hover
+{
+	background-color: #3385ff;
+}
+
+input[class="register"]:focus,
+input[class="login"]:focus,
+input[class="ok"]:focus,
+input[class="cancel"]:focus
+{
+	-webkit-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.75);
+	-moz-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.75);
+	box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.75);
+}
+
+input[class="ok"]
+{
+	background-color: #0066ff;
+	margin-top: 50px;
+	width: 300px;
+	font-size: 20px;
+	color: white;
+	padding: 15px 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 1px;
+	outline: none;
+	transition: background-color 0.2s ease-in-out;
+}
+
+input[class="ok"]:hover
+{
+	background-color: #3385ff;
+}
+
+input[class="cancel"]
+{
+	background-color: #cc0000;
+	width: 300px;
+	font-size: 20px;
+	color: white;
+	padding: 15px 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 1px;
+	outline: none;
+	margin-top: 10px;
+	transition: background-color 0.2s ease-in-out;
+}
+
+input[class="cancel"]:hover
+{
+	background-color: #e60000;
+}
+
+.table
+{
+	margin-top: 20px;
+	border-style: dashed;
+	float: left;
+	border-width: 1px;
+	border-radius: 10px;
+	border-color: #0066ff;
+	width: 300px;
+}
+
+td
+{
+	padding: 10px;
+	border-width: 1px;
+	text-align: center;
+}
+
+#summary
+{
+	margin-top: 20px;
+	border: dashed;
+	border-color: #0066ff;
+	border-radius: 10px;
+	border-width: 1px;
+	width: 280px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	color: #00b33c;
+	font-weight: bold;
+}
+
+#piechart
+{
+	margin-left: 280px;
+	margin-top: 50px;
+	color: #0066ff;
+}
