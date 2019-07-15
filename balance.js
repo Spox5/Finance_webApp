@@ -30,7 +30,7 @@ function showCurrentMonth()
 			
 		for (i=0; i<7; i++)
 		{	
-			table = document.getElementById("table1");
+			table = document.getElementById("table");
 			lastRow = table.rows.length;
 			row = table.insertRow(lastRow);
 
@@ -47,7 +47,7 @@ function showCurrentMonth()
 			sum = sum + parseInt(textNode.nodeValue);
 		}
 
-		table = document.getElementById("table1");
+		table = document.getElementById("table");
 		lastRow = table.rows.length;
 		row = table.insertRow(lastRow);
 
@@ -81,7 +81,7 @@ function drawChart()
 	]);
 
   // Optional; add a title and set the width and height of the chart
-	var options = {title: "Przykładowy wykres", 'width':450, 'height':300, backgroundColor:'#303030', 'fontSize':15, pieHole: 0.5, legend: {position: 'labeled', textStyle: {color: 'white'}},
+	var options = {title: "Przykładowy wykres", 'width':450, 'height':300, backgroundColor:'#F5F5F5', 'fontSize':15, pieHole: 0.5, legend: {position: 'labeled', textStyle: {color: 'black'}},
 	chartArea: {width:'90%',height:'80%'}, pieSliceText: 'none'};
 
 

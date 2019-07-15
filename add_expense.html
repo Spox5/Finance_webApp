@@ -2,62 +2,91 @@
 <html lang="pl">
 <head>
 	<meta charset="utf-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	
-	<title>AddExpense</title>
+	<title>Przyszły milioner</title>
 	
-	<link rel="stylesheet" href="style_add_expense.css" type="text/css" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap&subset=latin-ext" rel="stylesheet">
+	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
+	
+	<!--żeby znaczniki HTML5 działay na starszych przeglądarkach https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js-->
 	
 </head>
 
 <body>
+
+	<header>
+		<div class="header">
+			<div class="logo"><i class="icon-money"></i><b>Przyszły milioner</b></div>
+		</div>
+	</header>
+	
+	<nav>
+		<div class="nav">
+		
+			<ol>
+				<li><a href="main.html"><i class="icon-home"></i>Strona główna</a></li>
+				<li><a href="#"><i class="icon-dollar"></i>Dodaj przychód</a></li>
+				<li><a href="add_expense.html"><i class="icon-basket"></i>Dodaj wydatek</a></li>
+				<li><a href="balance.html"><i class="icon-calendar"></i>Pokaż bilans</a></li>
+				<li><a href="#"><i class="icon-wrench"></i>Ustawienia</a></li>
+				<li><a href="reg_log.html"><i class="icon-logout"></i>Wyloguj</a></li>
+			</ol>
+		
+		</div>
+		
+	</nav>
+
 	<div id="container">
-	<headre>
-		<div id="title">
-			<h1>Dodaj przychód</h1>
-		</div>
-	</headre>
+	
+		<form>
 		
-		<div class="rectangle"></div>
-		
-	<main>
-		<div id="scoitaner">
+			<div id="title">Podaj dane:</div>
 			
-			Kwota: <input type="text" id="field"/>
-			Data: <input type="text" id="field"/><br/><br/>
-			Sposób płatności:<br/>
-			<input type="radio" name="payment_method" value="cash">Gotówka
-			<input type="radio" name="payment_method" value="debet_card">Karta debetowa
-			<input type="radio" name="payment_method" value="credit_card">Karta kredytowa<br/><br/>
-			Kategoria:<br/>
-			<input type="radio" name="category" value="food">Jedzenie
-			<input type="radio" name="category" value="flat">Mieszkanie
-			<input type="radio" name="category" value="transport">Transport
-			<input type="radio" name="category" value="telecommunication">Telekomunikacja<br/>				
-			<input type="radio" name="category" value="healthcare">Opieka zdrowotna
-			<input type="radio" name="category" value="clothes">Ubrania
-			<input type="radio" name="category" value="hygiene">Higiena
-			<input type="radio" name="category" value="children">Dzieci<br/>
-			<input type="radio" name="category" value="entertainment">Rozrywka
-			<input type="radio" name="category" value="trip">Wycieczka
-			<input type="radio" name="category" value="training">Szkolenia
-			<input type="radio" name="category" value="books">Książki<br/>			<input type="radio" name="category" value="savings">Oszczędności
-			<input type="radio" name="category" value="pension">Na złotą jesień, czyli emeryturę<br/>
-			<input type="radio" name="category" value="dept">Spłata długów
-			<input type="radio" name="category" value="donation">Darowizna
-			<input type="radio" name="category" value="other">Inne wydatki<br/><br/>
-			Komentarz (opcjonalnie)<br/><input type="text" id="field"/><br/><br/>
-			<input type="submit" value="Dodaj" onclick="wypisz()"/>
-			<input type="submit" value="Anuluj" onclick="wypisz()"/>
-		</div>
-	</main>
+			<div><input type="number" placeholder="kwota" onfocus="this.placeholder=''" onblur="this.placeholder='kwota'"></div>
+			
+			<div><input type="date"></div>
+			
+			<fieldset>
+					
+				<legend>Sposób płatności</legend>
+								
+				<div><label><input type="radio" name="payment_method">Gotówka</label></div>
+				<div><label><input type="radio" name="payment_method">Karta debetowa</label></div>
+				<div><label><input type="radio" name="payment_method">Karta kredytowa</label></div>
+								
+			</fieldset>
+				
+			<fieldset>
+						
+				<legend>Kategoria</legend>
+					
+				<div><label><input type="radio" name="category">Jedzenie</label></div>
+				<div><label><input type="radio" name="category">Mieszkanie</label></div>
+				<div><label><input type="radio" name="category">Transport</label></div>
+				<div><label><input type="radio" name="category">Telekomunikacja</label></div>
+				<div><label><input type="radio" name="category">Opieka zdrowotna</label></div>					<div><label><input type="radio" name="category">Ubrania</label></div>
+				<div><label><input type="radio" name="category">Higiena</label></div>
+				<div><label><input type="radio" name="category">Dzieci</label></div>
+				<div><label><input type="radio" name="category">Rozrywka</label></div>
+				<div><label><input type="radio" name="category">Wycieczka</label></div>
+				<div><label><input type="radio" name="category">Szkolenia</label></div>					<div><label><input type="radio" name="category">Książki</label></div>						<div><label><input type="radio" name="category">Oszczędności</label></div>
+				<div><label><input type="radio" name="category">Na złotą jesień, czyli emeryturę</label></div>
+				<div><label><input type="radio" name="category" value="dept">Spłata długów</label></div>
+				<div><label><input type="radio" name="category" value="donation">Darowizna</label></div>
+				<div><label><input type="radio" name="category" value="other">Inne wydatki</label></div>
+						
+				<div><input type="text" placeholder="komentarz (opcjonalnie)" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz (opcjonalnie)'"></div>
+						
+				<div><input type="submit" class="ok" value="Dodaj"></div>
+				<div><input type="submit" class="cancel" value="Anuluj"></div>
+						
+			</fieldset>
+				
+		</form>
 		
-		<div class="rectangle"></div>
-		
-		<div id="footer">Prowadzenie budżetu osobistego &copy; Wszelkie prawa zastrzeżone</div>
 	</div>
-	
-	
+
 </body>
 </html>
