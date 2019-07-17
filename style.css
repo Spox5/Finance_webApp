@@ -3,38 +3,40 @@ body
 	background-color: #F5F5F5;
 	font-family: 'Lato', sans-serif;
 	color: black;
+}
+
+.container-fluid 
+{
 	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
 }
 
 .header
 {
-	width: 100%;
 	padding: 30px 0;
 	background-color: #303030;
-	color: white;
-}
-
-.logo
-{
-	width: 500px;
-	font-size: 50px;
-	margin-left: auto;
-	margin-right: auto;
-	letter-spacing: 2px;
-}
-
-#container
-{
-	width: 1000px;
-	min-height: 400px;
-	margin-top: 40px;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 15px;
 	text-align: center;
 }
 
-#container #title
+h1
+{
+	font-size: 50px;
+	letter-spacing: 2px;
+	color: white;
+}
+
+#main
+{
+	margin-top: 40px;
+	font-size: 15px;
+	text-align: center;
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#main #title
 {
 	font-size: 30px;
 	color: #0066ff;
@@ -43,74 +45,37 @@ body
 .log_form
 {
 	font-size: 30px;
-	margin-top: 20px;
-	width: 500px;
-	float: left;
-	text-align: center;
+	margin-top: 20px;	
 }
 
-.nav
+.navbar
 {
-	width: 100%;
-	padding: 10px 0;
 	background-color: grey;
-	text-align: center;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 	transition: background-color 0.2s ease-in-out;
 }
 
-ol
+.navbar-collapse {color: white;}
+
+.dropdown-menu
 {
-	padding: 0;
-	margin: 0;
-	list-style-type: none;
-	font-size: 18px;
-	height: 35px;
-	line-height: 200%;
-	display: inline-block;
-	transition: background-color 0.2s ease-in-out;
+	background-color: grey;
+	margin-top: 10px;
+	border-color: white;
+	border-width: 3px;
+	border-radius: 7px;
+	text-align: center;
 }
 
-ol a
-{
-	color: white;
-	text-decoration: none;
-	display: block;
-}
+.dropdown-menu div {color: white; text-align: center;}
 
-ol > li
-{
-	float: left;
-	width: 200px;
-	height: 40px;
-	border-right: 1px dashed black;
-	transition: background-color 0.2s ease-in-out;
-}
-
-ol > li:first-child
-{
-	border-left: 1px dashed black; 
-}
-
-ol > li:hover
-{
-	background-color: white;
-}
-
-ol > li a {transition: color 0.2s ease-in-out;}
-
-ol > li:hover > a
-{
-	color: black;
-}
+.dropdown-item {color: white;}
 
 .pic
 {
 	margin-top: 30px;
-	margin-left: 200px;
-	width: 400px;	
-	float: left;
+	width: 350px;	
 	border-radius: 5px;
 	border-color: #0066ff;
 	border-style: solid;
@@ -118,19 +83,15 @@ ol > li:hover > a
 }
 #welcome 
 {
-	float: left;
-	width: 500px;
 	margin-top: 90px;
-	margin-left: 50px;
 	font-size: 50px;
-	text-align: center;
 	color: #0066ff;
 	
 }
 
 #welcome div div
 {
-	margin-top: 30px;
+	margin-bottom: 30px;
 	font-size: 20px;
 }
 
@@ -230,7 +191,7 @@ input[class="cancel"]:focus
 input[class="ok"]
 {
 	background-color: #0066ff;
-	margin-top: 50px;
+	margin-top: 25px;
 	width: 300px;
 	font-size: 20px;
 	color: white;
@@ -261,6 +222,7 @@ input[class="cancel"]
 	letter-spacing: 1px;
 	outline: none;
 	margin-top: 10px;
+	margin-bottom: 30px;
 	transition: background-color 0.2s ease-in-out;
 }
 
@@ -269,42 +231,39 @@ input[class="cancel"]:hover
 	background-color: #e60000;
 }
 
-.table
+.table1
 {
 	margin-top: 20px;
 	border-style: dashed;
-	float: left;
 	border-width: 1px;
 	border-radius: 10px;
 	border-color: #0066ff;
-	width: 300px;
 }
 
-td
+table
+{
+	border-width: 1px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+th
 {
 	padding: 10px;
-	border-width: 1px;
 	text-align: center;
 }
 
-#summary
+.summary
 {
 	margin-top: 20px;
-	border: dashed;
-	border-color: #0066ff;
-	border-radius: 10px;
-	border-width: 1px;
-	width: 280px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 10px;
 	color: #00b33c;
 	font-weight: bold;
 }
 
 #piechart
 {
-	margin-left: 280px;
 	margin-top: 50px;
 	color: #0066ff;
+	margin-left: auto;
+	margin-right: auto;
 }
