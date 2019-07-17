@@ -3,74 +3,169 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<title>Przyszły milioner</title>
 	
-	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap&subset=latin-ext" rel="stylesheet">
+	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
 	
 	<script src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="balance.js"></script>
 	
-	<!--żeby znaczniki HTML5 działay na starszych przeglądarkach https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js-->
+	<!--żeby znaczniki HTML5 działay na starszych przeglądarkach <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>-->
 
 </head>
 
 <body>
 
-	<header>
-		<div class="header">
-			<div class="logo"><i class="icon-money"></i><b>Przyszły milioner</b></div>
-		</div>
-	</header>
+	<main>
+
+		<div class="container-fluid">
+		
+			<div class="container-fluid">
+		
+			<div class="modal fade" id="periodDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Podaj datę</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body">
+					<form>
+					  <div class="form-group">
+						<label for="recipient-name" class="col-form-label">Podaj zakres dat, którego ma dotyczyć bilans.</label>
+						<label>Od: <input type="date" class="form-control" id="recipient-name"></label>
+						<label>Do: <input type="date" class="form-control" id="recipient-name"></label>
+					  </div>
+					</form>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+					<button type="button" class="btn btn-primary">Akceptuj</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+				
+			<header>
+				<div class="header">
+					<h1><i class="icon-money mr-1"></i><b>Przyszły milioner</b></h1>
+				</div>
+			</header>
+
+			<nav class="navbar na navbar-dark navbar-expand-lg">
+			
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Navigation switch">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<div  class="collapse navbar-collapse" id="mainmenu">
+				
+					<ul class="navbar-nav mr-auto">
+					
+						<li class="nav-item">
+							<a class="nav-link" href="main.html">
+								<i class="icon-home"></i>Strona główna
+							</a>
+						</li>
+						
+						<li class="nav-item">
+							<a class="nav-link" href="add_income.html">
+								<i class="icon-dollar"></i>Dodaj przychód
+							</a>
+						</li>
+						
+						<li class="nav-item">
+							<a class="nav-link" href="add_expense.html">
+								<i class="icon-basket"></i>Dodaj wydatek
+							</a>
+						</li>
+						
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" id="submenu" aria-haspopup="true">
+								<i class="icon-calendar"></i>Pokaż bilans
+							</a>
+							
+							<div class="dropdown-menu" aria-labelledby="submenu">
+							
+								<a class="dropdown-item" href="balance.html">Bieżący miesiąc</a>
+								<a class="dropdown-item" href="#">Poprzedni miesiąc</a>
+								<a class="dropdown-item" href="#">Bieący rok</a>
+								
+								<div class="dropdown-divider"></div>
+								
+								<div>Niestandardowe
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#periodDate">Podaj datę</button>
+								</div>
+							
+							</div>
+						
+						</li>
+						
+						<li class="nav-item"><a class="nav-link" href="#"><i class="icon-wrench"></i>Ustawienia</a></li>
+						
+						<li class="nav-item"><a class="nav-link" href="reg_log.html"><i class="icon-logout"></i>Wyloguj</a></li>
+						
+					</ul>
+				
+				</div>
+				
+			</nav>
 	
-	<nav>
-		<div class="nav">
+			<div id="main">
+			
+				<div class="row">
+				
+					
+					<div class="col-md-12">
+						
+						<div id="title">Bieżący miesiąc:</div>
+						
+					</div>	
+					
+						<div class="table1 col-sm-12 col-md-6">
+							<table>
+								<tr>
+									<th>Przychody</th>
+								</tr>
+							</table>
+						</div>
+						
+						<div class="table1 col-sm-12 col-md-6">
+							<table>
+								<tr>
+									<th>Wydatki</th>
+								</tr>
+							</table>
+						</div>
+						
+						<div class="summary col-md-12">Podsumowanie bilansu:
+							<div>Gratulacje! Świetnie zarządzasz finansami</div>
+						</div>
 		
-			<ol>
-				<li><a href="main.html"><i class="icon-home"></i>Strona główna</a></li>
-				<li><a href="#"><i class="icon-dollar"></i>Dodaj przychód</a></li>
-				<li><a href="add_expense.html"><i class="icon-basket"></i>Dodaj wydatek</a></li>
-				<li><a href="balance.html"><i class="icon-calendar"></i>Pokaż bilans</a></li>
-				<li><a href="#"><i class="icon-wrench"></i>Ustawienia</a></li>
-				<li><a href="reg_log.html"><i class="icon-logout"></i>Wyloguj</a></li>
-			</ol>
+						<div id="piechart"></div>
 		
-		</div>
-		
-	</nav>
+					</div>
+			
+				</div>
+			
+			</div>
 	
-	<div id="container">
-		
-		<div id="title">Bieżący miesiąc:</div>
-		
-		<div style="text-align: left; margin-left: auto; width:30%; margin-right: auto">
-		<table class="table">
-			<tr>
-				<td>Przychody</td>
-			</tr>
-		</table>
 		</div>
-		
-		<div style="text-align: left; margin-left: auto; width:30%; margin-right: auto">
-		
-		<table class="table" >
-			<tr>
-				<td>Wydatki</td>
-			</tr>
-		</table>
-		</div>
-		
-		<div style="clear:both"></div>
-		
-		<div id="summary">Podsumowanie bilansu:<br />
-			<span>Gratulacje! Świetnie zarządzasz finansami</span>
-		</div>
-		
-		<div id="piechart"></div>
-		
-	</div>
+	
+	</main>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	
+	<script src="js/bootstrap.min.js"></script>
 
 </body>
 </html>
