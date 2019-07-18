@@ -46,6 +46,7 @@ h1
 {
 	font-size: 30px;
 	margin-top: 20px;	
+	margin-bottom: 30px;
 }
 
 .navbar
@@ -131,6 +132,7 @@ input[type="date"]
 	color: #666666;
 	border: 2px solid #ddd;
 	border-radius: 5px;
+	border-color: grey;
 	font-size: 17px;
 	padding: 5px;
 	box-sizing: border-box;
