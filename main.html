@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
 	
+	<link href="css/all.css" rel="stylesheet">
+	
 	<!--żeby znaczniki HTML5 działay na starszych przeglądarkach <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>-->
 	
 </head>
@@ -41,8 +43,8 @@
 					</form>
 				  </div>
 				  <div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-					<button type="button" class="btn btn-primary">Akceptuj</button>
+					<button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Anuluj</button>
+					<button type="button" class="btn btn-modal-ok">Akceptuj</button>
 				  </div>
 				</div>
 			  </div>
@@ -54,15 +56,15 @@
 				</div>
 			</header>
 
-			<nav class="navbar na navbar-dark navbar-expand-lg">
+			<nav class="navbar navbar-expand-lg">
 			
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Navigation switch">
-					<span class="navbar-toggler-icon"></span>
+					<div id="hamburger-icon"><i class="icon-menu"></i></div>
 				</button>
 				
 				<div  class="collapse navbar-collapse" id="mainmenu">
 				
-					<ul class="navbar-nav mr-auto">
+					<ul class="navbar-nav mx-auto nav">
 					
 						<li class="nav-item">
 							<a class="nav-link" href="main.html">
@@ -91,7 +93,7 @@
 							
 								<a class="dropdown-item" href="balance.html">Bieżący miesiąc</a>
 								<a class="dropdown-item" href="#">Poprzedni miesiąc</a>
-								<a class="dropdown-item" href="#">Bieący rok</a>
+								<a class="dropdown-item" href="#">Bieżący rok</a>
 								
 								<div class="dropdown-divider"></div>
 								
@@ -130,7 +132,7 @@
 					<div id="welcome">
 				
 						<div> Dzień dobry! 
-							<div> Jaki plan działania na dzisiaj? </div>
+							<div> Jaki plan działania na dzisiaj?</div>
 						</div>
 				
 					</div>

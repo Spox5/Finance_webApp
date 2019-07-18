@@ -53,22 +53,37 @@ h1
 	background-color: grey;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
-	transition: background-color 0.2s ease-in-out;
 }
 
-.navbar-collapse {color: white;}
+ul.nav a {color: white; transition: color 0.2s ease-in-out;}
+ul.nav a:hover {color: black;}
+
+ul.nav > li {border-radius: 10px; transition: background-color 0.2s ease-in-out;}
+ul.nav > li:hover {background-color: white;}
+
+#hamburger-icon 
+{
+	color: white;
+	font-size: 29px;
+}
 
 .dropdown-menu
 {
 	background-color: grey;
 	margin-top: 10px;
-	border-color: white;
-	border-width: 3px;
+	border-color:black;
+	border-width: 1px;
 	border-radius: 7px;
 	text-align: center;
+	color: white;
 }
 
-.dropdown-menu div {color: white; text-align: center;}
+.btn-modal-cancel {background-color: #cc0000; color: white;}
+.btn-modal-cancel:hover {background-color: #e60000; color: white;}
+
+
+.btn-modal-ok {background-color: #0066ff; color: white;}
+.btn-modal-ok:hover {background-color: #3385ff; color: white;}
 
 .dropdown-item {color: white;}
 
@@ -195,7 +210,7 @@ input[class="ok"]
 	width: 300px;
 	font-size: 20px;
 	color: white;
-	padding: 15px 10px;
+	padding: 10px 5px;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
@@ -215,7 +230,7 @@ input[class="cancel"]
 	width: 300px;
 	font-size: 20px;
 	color: white;
-	padding: 15px 10px;
+	padding: 10px 5px;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
