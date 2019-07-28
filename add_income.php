@@ -1,3 +1,63 @@
+<?php
+
+	session_start();
+	
+	if (!isset($_SESSION['logged']))
+	{
+		header('Location: index.php');
+		exit();
+	}
+	
+	if (isset($_POST['amount']))
+	{
+		//income walidation ok
+		$all_ok = true;
+		
+		$logged_user_id = $_SESSION['user_id'];
+		$amount = $_POST['amount'];
+		$date = $_POST['date'];
+		$category = $_POST['category'];
+		$comment = $_POST['comment'];
+		
+		
+		require_once "connect.php";
+		
+		try
+		{
+			$connect = new mysqli($host, $db_user, $db_password, $db_name);
+			if ($connect->connect_errno!=0)
+			{
+				throw new Exception(mysqli_connect_errno());
+			}
+			else
+			{
+				if ($connect->query("INSERT INTO incomes VALUES(NULL, '$logged_user_id', '$category','$amount' ,'$date', '$comment')"))
+				{
+					;
+				}
+				
+				else
+				{
+					throw new Exception($connect->error);
+				}
+				
+				$connect->close();
+			}
+			
+		}
+		catch (Exception $e)
+		{
+			echo "Błąd serwera. Przepraszamy za niedogodności";
+			echo '<br /> Info dev.'.$e;
+		}
+
+	}
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -12,11 +72,8 @@
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
 	
-	<script src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="balance.js"></script>
-	
 	<!--żeby znaczniki HTML5 działay na starszych przeglądarkach <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>-->
-
+	
 </head>
 
 <body>
@@ -24,8 +81,6 @@
 	<main>
 
 		<div class="container-fluid">
-		
-			<div class="container-fluid">
 		
 			<div class="modal fade" id="periodDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
@@ -56,8 +111,11 @@
 			<header>
 				<div class="header">
 					<h1><i class="icon-money mr-1"></i><b>Przyszły milioner</b></h1>
+	
 				</div>
 			</header>
+
+			<div class="modal"></div>
 
 			<nav class="navbar navbar-expand-lg">
 			
@@ -110,57 +168,56 @@
 						
 						<li class="nav-item"><a class="nav-link" href="#"><i class="icon-wrench"></i>Ustawienia</a></li>
 						
-						<li class="nav-item"><a class="nav-link" href="reg_log.html"><i class="icon-logout"></i>Wyloguj</a></li>
+						<li class="nav-item"><a class="nav-link" href="index.html"><i class="icon-logout"></i>Wyloguj</a></li>
 						
 					</ul>
 				
 				</div>
 				
 			</nav>
-	
+
 			<div id="main">
 			
-				<div class="row">
-				
-					
-					<div class="col-md-12">
-						
-						<div id="title">Bieżący miesiąc:</div>
-						
-					</div>	
-					
-						<div class="table1 col-sm-12 col-md-6">
-							<table>
-								<tr>
-									<th>Przychody</th>
-								</tr>
-							</table>
-						</div>
-						
-						<div class="table1 col-sm-12 col-md-6">
-							<table>
-								<tr>
-									<th>Wydatki</th>
-								</tr>
-							</table>
-						</div>
-						
-						<div class="summary col-md-12">Podsumowanie bilansu:
-							<div>Gratulacje! Świetnie zarządzasz finansami</div>
-						</div>
-		
-						<div id="piechart"></div>
-		
-					</div>
+			<div class="row">
 			
-				</div>
+			<div class="col-md-12">
+	
+				<form method="post">
+		
+					<div id="title">Podaj dane:</div>
+
+					<div><input type="number" step="0.01" min="0" placeholder="kwota" onfocus="this.placeholder=''" onblur="this.placeholder='kwota'" name="amount"></div>
+			
+					<div><input type="date" name="date"></div>
+				
+					<fieldset>
+						
+						<legend>Kategoria</legend>
+							
+						<div><label><input type="radio" name="category" value="wynagrodzenie">Wynagrodzenie</label></div>
+						<div><label><input type="radio" name="category">Odsetki bankowe</label></div>
+						<div><label><input type="radio" name="category">Sprzedaż na Allegro</label></div>
+						<div><label><input type="radio" name="category">Inne</label></div>
+								
+						<div><input type="text" placeholder="komentarz (opcjonalnie)" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz (opcjonalnie)'" name="comment"></div>
+								
+						<div><input type="submit" class="ok" value="Dodaj"></div>
+						<div><input type="submit" class="cancel" value="Anuluj"></div>
+						
+					</fieldset>
+				
+				</form>
 			
 			</div>
-	
+			
+			</div>	
+			
+			</div>
+		
 		</div>
-	
+		
 	</main>
-	
+
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
