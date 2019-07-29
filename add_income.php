@@ -128,19 +128,19 @@
 					<ul class="navbar-nav mx-auto nav">
 					
 						<li class="nav-item">
-							<a class="nav-link" href="main.html">
+							<a class="nav-link" href="main.php">
 								<i class="icon-home"></i>Strona główna
 							</a>
 						</li>
 						
 						<li class="nav-item">
-							<a class="nav-link" href="add_income.html">
+							<a class="nav-link" href="add_income.php">
 								<i class="icon-dollar"></i>Dodaj przychód
 							</a>
 						</li>
 						
 						<li class="nav-item">
-							<a class="nav-link" href="add_expense.html">
+							<a class="nav-link" href="add_expense.php">
 								<i class="icon-basket"></i>Dodaj wydatek
 							</a>
 						</li>
@@ -194,10 +194,10 @@
 						
 						<legend>Kategoria</legend>
 							
-						<div><label><input type="radio" name="category" value="wynagrodzenie">Wynagrodzenie</label></div>
-						<div><label><input type="radio" name="category">Odsetki bankowe</label></div>
-						<div><label><input type="radio" name="category">Sprzedaż na Allegro</label></div>
-						<div><label><input type="radio" name="category">Inne</label></div>
+						<div><label><input type="radio" name="category" value=1>Wynagrodzenie</label></div>
+						<div><label><input type="radio" name="category" value=2>Odsetki bankowe</label></div>
+						<div><label><input type="radio" name="category" value=3>Sprzedaż na Allegro</label></div>
+						<div><label><input type="radio" name="category" value=4>Inne</label></div>
 								
 						<div><input type="text" placeholder="komentarz (opcjonalnie)" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz (opcjonalnie)'" name="comment"></div>
 								
