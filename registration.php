@@ -91,12 +91,8 @@
 					if($connect->query("INSERT INTO users VALUES(NULL, '$username_reg', '$password_hashed','$email_reg')"))
 					{
 						$_SESSION['registration_complete'] = "Rejestracja udana. Możesz zalogować się na swoje konto";
-						
-						$max_id = $connect->query("SELECT max(id) FROM users");
-						
-						$default_name = $connect->query("SELECT name FROM incomes_category_default");
-						
-						$connect->query("INSERT INTO incomes_category_assigned_to_users (name, user_id) SELECT name FROM incomes_category_default AND SELECT max(id) FROM users");
+	
+						$connect->query("INSERT INTO incomes_category_assigned_to_users (user_id, name) SELECT users.id, incomes_category_default.name FROM users, incomes_category_default WHERE users.id = (SELECT max(id) FROM users)");
 						
 						header('Location: index.php');
 					}

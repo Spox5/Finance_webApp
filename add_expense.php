@@ -68,19 +68,19 @@
 					<ul class="navbar-nav mx-auto nav">
 					
 						<li class="nav-item">
-							<a class="nav-link" href="main.html">
+							<a class="nav-link" href="main.php">
 								<i class="icon-home"></i>Strona główna
 							</a>
 						</li>
 						
 						<li class="nav-item">
-							<a class="nav-link" href="add_income.html">
+							<a class="nav-link" href="add_income.php">
 								<i class="icon-dollar"></i>Dodaj przychód
 							</a>
 						</li>
 						
 						<li class="nav-item">
-							<a class="nav-link" href="add_expense.html">
+							<a class="nav-link" href="add_expense.php">
 								<i class="icon-basket"></i>Dodaj wydatek
 							</a>
 						</li>

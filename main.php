@@ -79,7 +79,7 @@
 					<ul class="navbar-nav mx-auto nav">
 					
 						<li class="nav-item">
-							<a class="nav-link" href="main.html">
+							<a class="nav-link" href="main.php">
 								<i class="icon-home"></i>Strona główna
 							</a>
 						</li>
