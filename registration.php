@@ -94,6 +94,10 @@
 	
 						$connect->query("INSERT INTO incomes_category_assigned_to_users (user_id, name) SELECT users.id, incomes_category_default.name FROM users, incomes_category_default WHERE users.id = (SELECT max(id) FROM users)");
 						
+						$connect->query("INSERT INTO payment_methods_assigned_to_users (user_id, name) SELECT users.id, payment_methods_default.name FROM users, payment_methods_default WHERE users.id = (SELECT max(id) FROM users)");
+						
+						$connect->query("INSERT INTO expenses_category_assigned_to_users (user_id, name) SELECT users.id, expenses_category_default.name FROM users, expenses_category_default WHERE users.id = (SELECT max(id) FROM users)");
+						
 						header('Location: index.php');
 					}
 					else
