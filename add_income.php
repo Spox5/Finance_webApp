@@ -152,7 +152,7 @@
 							
 							<div class="dropdown-menu" aria-labelledby="submenu">
 							
-								<a class="dropdown-item" href="balance.html">Bieżący miesiąc</a>
+								<a class="dropdown-item" href="balance.php">Bieżący miesiąc</a>
 								<a class="dropdown-item" href="#">Poprzedni miesiąc</a>
 								<a class="dropdown-item" href="#">Bieżący rok</a>
 								
@@ -168,7 +168,7 @@
 						
 						<li class="nav-item"><a class="nav-link" href="#"><i class="icon-wrench"></i>Ustawienia</a></li>
 						
-						<li class="nav-item"><a class="nav-link" href="index.html"><i class="icon-logout"></i>Wyloguj</a></li>
+						<li class="nav-item"><a class="nav-link" href="logout.php"><i class="icon-logout"></i>Wyloguj</a></li>
 						
 					</ul>
 				

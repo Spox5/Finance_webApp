@@ -1,3 +1,15 @@
+<?php
+
+	session_start();
+	
+	if (!isset($_SESSION['logged']))
+	{
+		header('Location: index.php');
+		exit();
+	}
+	
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -94,7 +106,7 @@
 							
 							<div class="dropdown-menu" aria-labelledby="submenu">
 							
-								<a class="dropdown-item" href="balance.html">Bieżący miesiąc</a>
+								<a class="dropdown-item" href="balance.php">Bieżący miesiąc</a>
 								<a class="dropdown-item" href="#">Poprzedni miesiąc</a>
 								<a class="dropdown-item" href="#">Bieżący rok</a>
 								
@@ -110,7 +122,7 @@
 						
 						<li class="nav-item"><a class="nav-link" href="#"><i class="icon-wrench"></i>Ustawienia</a></li>
 						
-						<li class="nav-item"><a class="nav-link" href="index.html"><i class="icon-logout"></i>Wyloguj</a></li>
+						<li class="nav-item"><a class="nav-link" href="logout.php"><i class="icon-logout"></i>Wyloguj</a></li>
 						
 					</ul>
 				
@@ -132,21 +144,155 @@
 						<div class="table1 col-sm-12 col-md-6">
 							<table>
 								<tr>
-									<th>Przychody</th>
+									<th colspan="4">Przychody</th>
 								</tr>
+								<tr>
+									<td><b>Kategoria</b></td>
+									<td><b>Wysokość</b></td>
+									<td><b>Data</b></td>
+									<td><b>Komentarz</b></td>
+								</tr>
+								<?php 
+								
+								require_once "connect.php";
+								
+								try
+								{
+									$connect = new mysqli($host, $db_user, $db_password, $db_name);
+									if ($connect->connect_errno!=0)
+									{
+										throw new Exception(mysqli_connect_errno());
+									}
+									else
+									{
+										$result = $connect->query("SELECT * FROM incomes WHERE user_id=$_SESSION[user_id] ORDER BY date_of_income DESC" );
+										
+										$count = $result->num_rows;
+										
+										$result->fetch_assoc();
+										
+										foreach($result as $data)
+										{
+											echo "<tr> \n";
+											echo "<td>$data[income_category_assigned_to_user_id]</td>";
+											echo "<td>$data[amount] zł</td>";
+											echo "<td>$data[date_of_income]</td>";
+											echo "<td>$data[income_comment]</td>";
+											echo "</tr> \n";
+										}
+										
+										$connect->close();
+									}
+									
+								}
+								catch (Exception $e)
+								{
+									echo "Błąd serwera. Przepraszamy za niedogodności";
+									echo '<br /> Info dev.'.$e;
+								}
+								
+								?>
 							</table>
 						</div>
 						
 						<div class="table1 col-sm-12 col-md-6">
 							<table>
 								<tr>
-									<th>Wydatki</th>
+									<th colspan="5">Wydatki</th>
 								</tr>
+								<tr>
+									<td><b>Kategoria</b></td>
+									<td><b>Płatność</b></td>
+									<td><b>Wysokość</b></td>
+									<td><b>Data</b></td>
+									<td><b>Komentarz</b></td>
+								</tr>
+								<?php 
+								
+								require_once "connect.php";
+								
+								try
+								{
+									$connect = new mysqli($host, $db_user, $db_password, $db_name);
+									if ($connect->connect_errno!=0)
+									{
+										throw new Exception(mysqli_connect_errno());
+									}
+									else
+									{
+										$result = $connect->query("SELECT * FROM expenses WHERE user_id=$_SESSION[user_id] ORDER BY date_of_expense DESC" );
+										
+										$count = $result->num_rows;
+										
+										$result->fetch_assoc();
+										
+										foreach($result as $data)
+										{
+											echo "<tr> \n";
+											echo "<td>$data[expense_category_assigned_to_user]</td>";
+											echo "<td>$data[payment_method_assigned_to_user]</td>";
+											echo "<td>$data[amount] zł</td>";
+											echo "<td>$data[date_of_expense]</td>";
+											echo "<td>$data[expense_comment]</td>";
+											echo "</tr> \n";
+										}
+										
+										$connect->close();
+									}
+									
+								}
+								catch (Exception $e)
+								{
+									echo "Błąd serwera. Przepraszamy za niedogodności";
+									echo '<br /> Info dev.'.$e;
+								}
+								
+								?>
 							</table>
 						</div>
 						
+						
 						<div class="summary col-md-12">Podsumowanie bilansu:
-							<div>Gratulacje! Świetnie zarządzasz finansami</div>
+							<?php 
+							
+							require_once "connect.php";
+								
+								try
+								{
+									$connect = new mysqli($host, $db_user, $db_password, $db_name);
+									if ($connect->connect_errno!=0)
+									{
+										throw new Exception(mysqli_connect_errno());
+									}
+									else
+									{
+										$result_income = $connect->query("SELECT SUM(amount) as income_summary FROM incomes WHERE user_id=$_SESSION[user_id]");
+										
+										$result_expense = $connect->query("SELECT SUM(amount) as expense_summary FROM expenses WHERE user_id=$_SESSION[user_id]");
+																
+										$row_income=mysqli_fetch_assoc($result_income);
+										$row_expense=mysqli_fetch_assoc($result_expense);
+										
+										$balance = $row_income['income_summary'] - $row_expense['expense_summary'];
+										echo "$balance zł";
+										if ($balance > 0)
+										{
+											echo "<div style='color: #00b33c'>Gratulacje! Świetnie zarządzasz finansami</div>";
+										}
+										else
+											echo "<div style='color: #e60000;'>Uważaj! Popadasz w długi</div>";																	
+										$connect->close();
+									}
+									
+								}
+								catch (Exception $e)
+								{
+									echo "Błąd serwera. Przepraszamy za niedogodności";
+									echo '<br /> Info dev.'.$e;
+								}
+								
+								?>
+								
 						</div>
 		
 						<div id="piechart"></div>

@@ -1,3 +1,64 @@
+<?php
+
+	session_start();
+	
+	if (!isset($_SESSION['logged']))
+	{
+		header('Location: index.php');
+		exit();
+	}
+	
+	if (isset($_POST['amount']))
+	{
+		//income walidation ok
+		$all_ok = true;
+		
+		$logged_user_id = $_SESSION['user_id'];
+		$amount = $_POST['amount'];
+		$date = $_POST['date'];
+		$payment_method = $_POST['payment_method'];
+		$category = $_POST['category'];
+		$comment = $_POST['comment'];
+		
+		
+		require_once "connect.php";
+		
+		try
+		{
+			$connect = new mysqli($host, $db_user, $db_password, $db_name);
+			if ($connect->connect_errno!=0)
+			{
+				throw new Exception(mysqli_connect_errno());
+			}
+			else
+			{
+				if ($connect->query("INSERT INTO expenses VALUES(NULL, '$logged_user_id', '$payment_method', '$category','$amount' ,'$date', '$comment')"))
+				{
+					;
+				}
+				
+				else
+				{
+					throw new Exception($connect->error);
+				}
+				
+				$connect->close();
+			}
+			
+		}
+		catch (Exception $e)
+		{
+			echo "Błąd serwera. Przepraszamy za niedogodności";
+			echo '<br /> Info dev.'.$e;
+		}
+
+	}
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -92,7 +153,7 @@
 							
 							<div class="dropdown-menu" aria-labelledby="submenu">
 							
-								<a class="dropdown-item" href="balance.html">Bieżący miesiąc</a>
+								<a class="dropdown-item" href="balance.php">Bieżący miesiąc</a>
 								<a class="dropdown-item" href="#">Poprzedni miesiąc</a>
 								<a class="dropdown-item" href="#">Bieżący rok</a>
 								
@@ -108,7 +169,7 @@
 						
 						<li class="nav-item"><a class="nav-link" href="#"><i class="icon-wrench"></i>Ustawienia</a></li>
 						
-						<li class="nav-item"><a class="nav-link" href="index.html"><i class="icon-logout"></i>Wyloguj</a></li>
+						<li class="nav-item"><a class="nav-link" href="logout.php"><i class="icon-logout"></i>Wyloguj</a></li>
 						
 					</ul>
 				
@@ -122,21 +183,21 @@
 			
 			<div class="col-md-12">
 	
-				<form>
+				<form method="post">
 		
 					<div id="title">Podaj dane:</div>
 
-					<div><input type="number" placeholder="kwota" onfocus="this.placeholder=''" onblur="this.placeholder='kwota'"></div>
+					<div><input type="number" step="0.01" min="0" placeholder="kwota" onfocus="this.placeholder=''" onblur="this.placeholder='kwota'" name="amount"></div>
 			
-					<div><input type="date"></div>
+					<div><input type="date" name="date"></div>
 			
 					<fieldset>
 					
 						<legend>Sposób płatności</legend>
 								
-						<div><label><input type="radio" name="payment_method">Gotówka</label></div>
-						<div><label><input type="radio" name="payment_method">Karta debetowa</label></div>
-						<div><label><input type="radio" name="payment_method">Karta kredytowa</label></div>
+						<div><label><input type="radio" name="payment_method" value=1>Gotówka</label></div>
+						<div><label><input type="radio" name="payment_method" value=2>Karta debetowa</label></div>
+						<div><label><input type="radio" name="payment_method" value=3>Karta kredytowa</label></div>
 								
 					</fieldset>
 				
@@ -144,25 +205,25 @@
 						
 						<legend>Kategoria</legend>
 							
-						<div><label><input type="radio" name="category">Jedzenie</label></div>
-						<div><label><input type="radio" name="category">Mieszkanie</label></div>
-						<div><label><input type="radio" name="category">Transport</label></div>
-						<div><label><input type="radio" name="category">Telekomunikacja</label></div>
-						<div><label><input type="radio" name="category">Opieka zdrowotna</label></div>					
-						<div><label><input type="radio" name="category">Ubrania</label></div>
-						<div><label><input type="radio" name="category">Higiena</label></div>
-						<div><label><input type="radio" name="category">Dzieci</label></div>
-						<div><label><input type="radio" name="category">Rozrywka</label></div>
-						<div><label><input type="radio" name="category">Wycieczka</label></div>
-						<div><label><input type="radio" name="category">Szkolenia</label></div>					
-						<div><label><input type="radio" name="category">Książki</label></div>						
-						<div><label><input type="radio" name="category">Oszczędności</label></div>
-						<div><label><input type="radio" name="category">Na złotą jesień, czyli emeryturę</label></div>
-						<div><label><input type="radio" name="category">Spłata długów</label></div>
-						<div><label><input type="radio" name="category">Darowizna</label></div>
-						<div><label><input type="radio" name="category" value="other">Inne wydatki</label></div>
+						<div><label><input type="radio" name="category" value=1>Jedzenie</label></div>
+						<div><label><input type="radio" name="category" value=2>Mieszkanie</label></div>
+						<div><label><input type="radio" name="category" value=3>Transport</label></div>
+						<div><label><input type="radio" name="category" value=4>Telekomunikacja</label></div>
+						<div><label><input type="radio" name="category" value=5>Opieka zdrowotna</label></div>					
+						<div><label><input type="radio" name="category" value=6>Ubrania</label></div>
+						<div><label><input type="radio" name="category" value=7>Higiena</label></div>
+						<div><label><input type="radio" name="category" value=8>Dzieci</label></div>
+						<div><label><input type="radio" name="category" value=9>Rozrywka</label></div>
+						<div><label><input type="radio" name="category" value=10>Wycieczka</label></div>
+						<div><label><input type="radio" name="category" value=11>Szkolenia</label></div>					
+						<div><label><input type="radio" name="category" value=12>Książki</label></div>						
+						<div><label><input type="radio" name="category" value=13>Oszczędności</label></div>
+						<div><label><input type="radio" name="category" value=14>Na złotą jesień, czyli emeryturę</label></div>
+						<div><label><input type="radio" name="category" value=15>Spłata długów</label></div>
+						<div><label><input type="radio" name="category" value=16>Darowizna</label></div>
+						<div><label><input type="radio" name="category" value=17>Inne wydatki</label></div>
 								
-						<div><input type="text" placeholder="komentarz (opcjonalnie)" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz (opcjonalnie)'"></div>
+						<div><input type="text" placeholder="komentarz (opcjonalnie)" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz (opcjonalnie)'" name="comment"></div>
 								
 						<div><input type="submit" class="ok" value="Dodaj"></div>
 						<div><input type="submit" class="cancel" value="Anuluj"></div>
