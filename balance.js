@@ -63,37 +63,32 @@ function showCurrentMonth()
 	}
 }
 
-// Load google charts
 google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawChart);
 
-// Draw the chart and set the chart values
-function drawChart() 
-{
-	var data = google.visualization.arrayToDataTable([
-	['Categories', 'Amount'],
-	['Work', 80],
-	['Friends', 2],
-	['Eat', 2],
-	['TV', 2],
-	['Gym', 2],
-	['Sleep', 8]
-	]);
+      function drawChart() {
 
-  // Optional; add a title and set the width and height of the chart
-	var options = {title: "Przykładowy wykres", 'width':450, 'height':300, backgroundColor:'#F5F5F5', 'fontSize':15, pieHole: 0.5, legend: {position: 'labeled', textStyle: {color: 'black'}},
-	chartArea: {width:'90%',height:'80%'}, pieSliceText: 'none'};
+        var data = google.visualization.arrayToDataTable([
+          ['Rodzaj', 'Kwota'],
+          
+		  <?php
+		  
+			while($row=$result->fetch_assoc())
+			{
+				echo "['".$row['expense_category_assigned_to_user']."',".$row['SUM(amount)']."],";
+			}
+		  
+		  ?>
+		  
+        ]);
 
+        var options = {
+          title: 'Wydatki'
+        };
 
-  // Display the chart inside the <div> element with id="piechart"
-	var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-	chart.draw(data, options);
-}
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-function pageLoad()
-{
-	showCurrentMonth();
-	drawChart();
-}
+        chart.draw(data, options);
+      }
 
 window.onload = pageLoad;
