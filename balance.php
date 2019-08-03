@@ -10,6 +10,33 @@
 	
 ?>
 
+<?php
+
+	require_once "connect.php";
+	
+	try
+	
+	{
+		$connect = new mysqli($host, $db_user, $db_password, $db_name);
+		if ($connect->connect_errno!=0)
+		{
+			throw new Exception(mysqli_connect_errno());
+		}
+		else
+		{
+			$query = "SELECT expenses_category_assigned_to_users.name, SUM(expenses.amount) FROM expenses_category_assigned_to_users, expenses WHERE expenses.user_id = expenses_category_assigned_to_users.user_id AND expenses.expense_category_assigned_to_user = expenses_category_assigned_to_users.id AND expenses.user_id=$_SESSION[user_id] GROUP BY expenses_category_assigned_to_users.name";
+			$result = $connect->query($query);
+		}
+	$connect->close();
+	}
+	catch (Exception $e)
+	{
+		echo "Błąd serwera. Przepraszamy za niedogodności";
+		echo '<br /> Info dev.'.$e;
+	}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -24,8 +51,45 @@
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
 	
-	<script src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="balance.js"></script>
+	<!-- pie chart -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Rodzaj', 'Kwota'],
+          
+		  <?php
+		  
+			while($row=$result->fetch_assoc())
+			{
+				echo "['".$row['name']."',".$row['SUM(expenses.amount)']."],";
+			}
+		  
+		  ?>
+		  
+        ]);
+
+        var options = {
+          title: 'Wydatki',
+		  backgroundColor: '#F5F5F5',
+		  width: '500',
+		  height: '300'
+		  
+        };
+;
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+	
+	
+	<!--<script src="balance.js"></script>
 	
 	<!--żeby znaczniki HTML5 działay na starszych przeglądarkach <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>-->
 
@@ -165,7 +229,7 @@
 									}
 									else
 									{
-										$result = $connect->query("SELECT * FROM incomes WHERE user_id=$_SESSION[user_id] ORDER BY date_of_income DESC" );
+										$result = $connect->query("SELECT incomes.user_id, incomes.amount, incomes.date_of_income, incomes.id, incomes.income_comment, incomes_category_assigned_to_users.name FROM incomes, incomes_category_assigned_to_users WHERE incomes.user_id = incomes_category_assigned_to_users.user_id AND incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.id AND incomes.user_id=$_SESSION[user_id] ORDER BY date_of_income DESC" );
 										
 										$count = $result->num_rows;
 										
@@ -174,7 +238,7 @@
 										foreach($result as $data)
 										{
 											echo "<tr> \n";
-											echo "<td>$data[income_category_assigned_to_user_id]</td>";
+											echo "<td>$data[name]</td>";
 											echo "<td>$data[amount] zł</td>";
 											echo "<td>$data[date_of_income]</td>";
 											echo "<td>$data[income_comment]</td>";
@@ -220,7 +284,7 @@
 									}
 									else
 									{
-										$result = $connect->query("SELECT * FROM expenses WHERE user_id=$_SESSION[user_id] ORDER BY date_of_expense DESC" );
+										$result = $connect->query("SELECT e_c.name, p_m.namem, e.amount, e.date_of_expense, e.expense_comment FROM expenses as e, payment_methods_assigned_to_users as p_m, expenses_category_assigned_to_users as e_c WHERE e.user_id = p_m.user_id AND e.user_id = e_c.user_id AND e.expense_category_assigned_to_user = e_c.id AND e.payment_method_assigned_to_user = p_m.id AND e.user_id=$_SESSION[user_id] ORDER BY date_of_expense DESC");
 										
 										$count = $result->num_rows;
 										
@@ -229,8 +293,8 @@
 										foreach($result as $data)
 										{
 											echo "<tr> \n";
-											echo "<td>$data[expense_category_assigned_to_user]</td>";
-											echo "<td>$data[payment_method_assigned_to_user]</td>";
+											echo "<td>$data[name]</td>";
+											echo "<td>$data[namem]</td>";
 											echo "<td>$data[amount] zł</td>";
 											echo "<td>$data[date_of_expense]</td>";
 											echo "<td>$data[expense_comment]</td>";
@@ -295,7 +359,7 @@
 								
 						</div>
 		
-						<div id="piechart"></div>
+						<div class = "expense_chart" id="piechart"></div>
 		
 					</div>
 			
@@ -306,6 +370,8 @@
 		</div>
 	
 	</main>
+	
+	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	
