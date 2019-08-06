@@ -25,7 +25,9 @@
 		}
 		else
 		{
-			$query = "SELECT e_c.name, SUM(e.amount) FROM expenses_category_assigned_to_users AS e_c, expenses AS e WHERE e.user_id = e_c.user_id AND e.expense_category_assigned_to_user = e_c.id AND e.user_id=$_SESSION[user_id] AND (MONTH (e.date_of_expense) = $current_month) GROUP BY e_c.name";
+			
+			
+			$query = "SELECT e_c.name, SUM(e.amount) FROM expenses_category_assigned_to_users AS e_c, expenses AS e WHERE e.user_id = e_c.user_id AND e.expense_category_assigned_to_user = e_c.id AND e.user_id=$_SESSION[user_id] AND (MONTH (e.date_of_expense) = $current_month - 1) GROUP BY e_c.name";
 			$result = $connect->query($query);
 		}
 	$connect->close();
@@ -220,8 +222,8 @@
 								<?php 
 								
 								require_once "connect.php";
+								
 								$current_month = date('m');
-	
 								
 								try
 								{
@@ -232,7 +234,7 @@
 									}
 									else
 									{
-										$result = $connect->query("SELECT i.user_id, i.amount, i.date_of_income, i.id, i.income_comment, i_c.name FROM incomes AS i, incomes_category_assigned_to_users AS i_c WHERE i.user_id = i_c.user_id AND i.income_category_assigned_to_user_id = i_c.id AND i.user_id=$_SESSION[user_id] AND (MONTH (i.date_of_income) = $current_month) ORDER BY date_of_income DESC" );
+										$result = $connect->query("SELECT i.user_id, i.amount, i.date_of_income, i.id, i.income_comment, i_c.name FROM incomes AS i, incomes_category_assigned_to_users AS i_c WHERE i.user_id = i_c.user_id AND i.income_category_assigned_to_user_id = i_c.id AND i.user_id=$_SESSION[user_id] AND (MONTH (i.date_of_income) = $current_month - 1) ORDER BY date_of_income DESC" );
 										
 										$count = $result->num_rows;
 										
@@ -288,7 +290,7 @@
 									}
 									else
 									{
-										$result = $connect->query("SELECT e_c.name, p_m.namem, e.amount, e.date_of_expense, e.expense_comment FROM expenses as e, payment_methods_assigned_to_users as p_m, expenses_category_assigned_to_users as e_c WHERE e.user_id = p_m.user_id AND e.user_id = e_c.user_id AND e.expense_category_assigned_to_user = e_c.id AND e.payment_method_assigned_to_user = p_m.id AND e.user_id=$_SESSION[user_id] AND (MONTH (e.date_of_expense) = $current_month) ORDER BY date_of_expense DESC");
+										$result = $connect->query("SELECT e_c.name, p_m.namem, e.amount, e.date_of_expense, e.expense_comment FROM expenses as e, payment_methods_assigned_to_users as p_m, expenses_category_assigned_to_users as e_c WHERE e.user_id = p_m.user_id AND e.user_id = e_c.user_id AND e.expense_category_assigned_to_user = e_c.id AND e.payment_method_assigned_to_user = p_m.id AND e.user_id=$_SESSION[user_id] AND (MONTH (e.date_of_expense) = $current_month - 1) ORDER BY date_of_expense DESC");
 										
 										$count = $result->num_rows;
 										
@@ -334,9 +336,9 @@
 									}
 									else
 									{
-										$result_income = $connect->query("SELECT SUM(amount) as income_summary FROM incomes WHERE user_id=$_SESSION[user_id] AND (MONTH (incomes.date_of_income) = $current_month)");
+										$result_income = $connect->query("SELECT SUM(amount) as income_summary FROM incomes WHERE user_id=$_SESSION[user_id] AND (MONTH (incomes.date_of_income) = $current_month - 1)");
 										
-										$result_expense = $connect->query("SELECT SUM(amount) as expense_summary FROM expenses WHERE user_id=$_SESSION[user_id] AND (MONTH (expenses.date_of_expense) = $current_month)");
+										$result_expense = $connect->query("SELECT SUM(amount) as expense_summary FROM expenses WHERE user_id=$_SESSION[user_id] AND (MONTH (expenses.date_of_expense) = $current_month - 1)");
 																
 										$row_income=mysqli_fetch_assoc($result_income);
 										$row_expense=mysqli_fetch_assoc($result_expense);
