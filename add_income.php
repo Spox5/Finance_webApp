@@ -194,10 +194,43 @@
 						
 						<legend>Kategoria</legend>
 							
-						<div><label><input type="radio" name="category" value=1>Wynagrodzenie</label></div>
-						<div><label><input type="radio" name="category" value=2>Odsetki bankowe</label></div>
-						<div><label><input type="radio" name="category" value=3>Sprzedaż na Allegro</label></div>
-						<div><label><input type="radio" name="category" value=4>Inne</label></div>
+						<?php	
+						
+						require_once "connect.php";
+								
+						try
+						{
+							$connect = new mysqli($host, $db_user, $db_password, $db_name);
+							if ($connect->connect_errno!=0)
+							{
+								throw new Exception(mysqli_connect_errno());
+							}
+							else
+							{
+								$result = $connect->query("SELECT incomes_category_assigned_to_users.name, incomes_category_assigned_to_users.id FROM incomes_category_assigned_to_users WHERE incomes_category_assigned_to_users.user_id=$_SESSION[user_id]" );
+								
+								$count = $result->num_rows;
+								
+								$result->fetch_assoc();
+								
+								foreach($result as $data)
+								{
+									echo "<div><label><input type='radio' name='category' value=$data[id]>$data[name]</label></div>";
+								}
+								
+								$connect->close();
+							}
+							
+						}
+						catch (Exception $e)
+						{
+							echo "Błąd serwera. Przepraszamy za niedogodności";
+							echo '<br /> Info dev.'.$e;
+						}
+							
+					
+						
+						?>
 								
 						<div><input type="text" placeholder="komentarz (opcjonalnie)" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz (opcjonalnie)'" name="comment"></div>
 								

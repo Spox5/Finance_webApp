@@ -55,8 +55,6 @@
 	}
 
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -93,18 +91,19 @@
 					</button>
 				  </div>
 				  <div class="modal-body">
-					<form>
+					<form action="balance_user_period.php" method="post">
 					  <div class="form-group">
 						<label class="col-form-label">Podaj zakres dat, którego ma dotyczyć bilans.</label>
-						<label>Od: <input type="date" class="form-control"></label>
-						<label>Do: <input type="date" class="form-control"></label>
+						<label>Od: <input type="date" class="form-control" name="date1"></label>
+						<label>Do: <input type="date" class="form-control" name="date2"></label>
+					  </div>
+					
+					  </div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Anuluj</button>
+						<button type="submit" class="btn btn-modal-ok">Akceptuj</button>
 					  </div>
 					</form>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Anuluj</button>
-					<button type="button" class="btn btn-modal-ok">Akceptuj</button>
-				  </div>
 				</div>
 			  </div>
 			</div>
@@ -154,8 +153,8 @@
 							<div class="dropdown-menu" aria-labelledby="submenu">
 							
 								<a class="dropdown-item" href="balance.php">Bieżący miesiąc</a>
-								<a class="dropdown-item" href="#">Poprzedni miesiąc</a>
-								<a class="dropdown-item" href="#">Bieżący rok</a>
+								<a class="dropdown-item" href="balance_previous_month.php">Poprzedni miesiąc</a>
+								<a class="dropdown-item" href="balance_user_period.php">Bieżący rok</a>
 								
 								<div class="dropdown-divider"></div>
 								
@@ -195,9 +194,41 @@
 					
 						<legend>Sposób płatności</legend>
 								
-						<div><label><input type="radio" name="payment_method" value=1>Gotówka</label></div>
-						<div><label><input type="radio" name="payment_method" value=2>Karta debetowa</label></div>
-						<div><label><input type="radio" name="payment_method" value=3>Karta kredytowa</label></div>
+						<?php	
+						
+						require_once "connect.php";
+								
+						try
+						{
+							$connect = new mysqli($host, $db_user, $db_password, $db_name);
+							if ($connect->connect_errno!=0)
+							{
+								throw new Exception(mysqli_connect_errno());
+							}
+							else
+							{
+								$result = $connect->query("SELECT payment_methods_assigned_to_users.namem, payment_methods_assigned_to_users.id FROM payment_methods_assigned_to_users WHERE payment_methods_assigned_to_users.user_id=$_SESSION[user_id]" );
+								
+								$count = $result->num_rows;
+								
+								$result->fetch_assoc();
+								
+								foreach($result as $data)
+								{
+									echo "<div><label><input type='radio' name='payment_method' value=$data[id]>$data[namem]</label></div>";
+								}
+								
+								$connect->close();
+							}
+							
+						}
+						catch (Exception $e)
+						{
+							echo "Błąd serwera. Przepraszamy za niedogodności";
+							echo '<br /> Info dev.'.$e;
+						}
+							
+						?>
 								
 					</fieldset>
 				
@@ -205,23 +236,41 @@
 						
 						<legend>Kategoria</legend>
 							
-						<div><label><input type="radio" name="category" value=1>Jedzenie</label></div>
-						<div><label><input type="radio" name="category" value=2>Mieszkanie</label></div>
-						<div><label><input type="radio" name="category" value=3>Transport</label></div>
-						<div><label><input type="radio" name="category" value=4>Telekomunikacja</label></div>
-						<div><label><input type="radio" name="category" value=5>Opieka zdrowotna</label></div>					
-						<div><label><input type="radio" name="category" value=6>Ubrania</label></div>
-						<div><label><input type="radio" name="category" value=7>Higiena</label></div>
-						<div><label><input type="radio" name="category" value=8>Dzieci</label></div>
-						<div><label><input type="radio" name="category" value=9>Rozrywka</label></div>
-						<div><label><input type="radio" name="category" value=10>Wycieczka</label></div>
-						<div><label><input type="radio" name="category" value=11>Szkolenia</label></div>					
-						<div><label><input type="radio" name="category" value=12>Książki</label></div>						
-						<div><label><input type="radio" name="category" value=13>Oszczędności</label></div>
-						<div><label><input type="radio" name="category" value=14>Na złotą jesień, czyli emeryturę</label></div>
-						<div><label><input type="radio" name="category" value=15>Spłata długów</label></div>
-						<div><label><input type="radio" name="category" value=16>Darowizna</label></div>
-						<div><label><input type="radio" name="category" value=17>Inne wydatki</label></div>
+						<?php	
+						
+						require_once "connect.php";
+								
+						try
+						{
+							$connect = new mysqli($host, $db_user, $db_password, $db_name);
+							if ($connect->connect_errno!=0)
+							{
+								throw new Exception(mysqli_connect_errno());
+							}
+							else
+							{
+								$result = $connect->query("SELECT expenses_category_assigned_to_users.name, expenses_category_assigned_to_users.id FROM expenses_category_assigned_to_users WHERE expenses_category_assigned_to_users.user_id=$_SESSION[user_id]" );
+								
+								$count = $result->num_rows;
+								
+								$result->fetch_assoc();
+								
+								foreach($result as $data)
+								{
+									echo "<div><label><input type='radio' name='category' value=$data[id]>$data[name]</label></div>";
+								}
+								
+								$connect->close();
+							}
+							
+						}
+						catch (Exception $e)
+						{
+							echo "Błąd serwera. Przepraszamy za niedogodności";
+							echo '<br /> Info dev.'.$e;
+						}
+						
+						?>
 								
 						<div><input type="text" placeholder="komentarz (opcjonalnie)" onfocus="this.placeholder=''" onblur="this.placeholder='komentarz (opcjonalnie)'" name="comment"></div>
 								
