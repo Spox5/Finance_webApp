@@ -46,18 +46,19 @@
 					</button>
 				  </div>
 				  <div class="modal-body">
-					<form>
+					<form action="balance_user_period.php" method="post">
 					  <div class="form-group">
 						<label class="col-form-label">Podaj zakres dat, którego ma dotyczyć bilans.</label>
-						<label>Od: <input type="date" class="form-control"></label>
-						<label>Do: <input type="date" class="form-control"></label>
+						<label>Od: <input type="date" class="form-control" name="date1"></label>
+						<label>Do: <input type="date" class="form-control" name="date2"></label>
+					  </div>
+					
+					</div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Anuluj</button>
+						<button type="submit" class="btn btn-modal-ok">Akceptuj</button>
 					  </div>
 					</form>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Anuluj</button>
-					<button type="button" class="btn btn-modal-ok">Akceptuj</button>
-				  </div>
 				</div>
 			  </div>
 			</div>
@@ -104,8 +105,8 @@
 							<div class="dropdown-menu" aria-labelledby="submenu">
 							
 								<a class="dropdown-item" href="balance.php">Bieżący miesiąc</a>
-								<a class="dropdown-item" href="#">Poprzedni miesiąc</a>
-								<a class="dropdown-item" href="#">Bieżący rok</a>
+								<a class="dropdown-item" href="balance_previous_month.php">Poprzedni miesiąc</a>
+								<a class="dropdown-item" href="balance_present_year.php">Bieżący rok</a>
 								
 								<div class="dropdown-divider"></div>
 								

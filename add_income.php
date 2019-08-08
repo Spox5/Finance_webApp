@@ -13,46 +13,44 @@
 		//income walidation ok
 		$all_ok = true;
 		
-		$logged_user_id = $_SESSION['user_id'];
-		$amount = $_POST['amount'];
-		$date = $_POST['date'];
-		$category = $_POST['category'];
-		$comment = $_POST['comment'];
-		
-		
 		require_once "connect.php";
 		
-		try
+		if (!empty($_POST['amount']) && !empty($_POST['date']) && isset($_POST['category']))
 		{
-			$connect = new mysqli($host, $db_user, $db_password, $db_name);
-			if ($connect->connect_errno!=0)
+			
+			$logged_user_id = $_SESSION['user_id'];
+			$amount = $_POST['amount'];
+			$date = $_POST['date'];
+			$category = $_POST['category'];
+			$comment = $_POST['comment'];
+		
+			try
 			{
-				throw new Exception(mysqli_connect_errno());
-			}
-			else
-			{
-				if ($connect->query("INSERT INTO incomes VALUES(NULL, '$logged_user_id', '$category','$amount' ,'$date', '$comment')"))
+				$connect = new mysqli($host, $db_user, $db_password, $db_name);
+				if ($connect->connect_errno!=0)
 				{
-					;
+					throw new Exception(mysqli_connect_errno());
 				}
-				
 				else
 				{
-					throw new Exception($connect->error);
+					$_SESSION['add_income_complete'] = "Przychód został dodany";
+					
+					$connect->query("INSERT INTO incomes VALUES(NULL, '$logged_user_id', '$category','$amount' ,'$date', '$comment')");
+					
+					$connect->close();
+					
+					header('Location: add_income.php');
 				}
 				
-				$connect->close();
 			}
-			
+			catch (Exception $e)
+			{
+				echo "Błąd serwera. Przepraszamy za niedogodności";
+				echo '<br /> Info dev.'.$e;
+			}
 		}
-		catch (Exception $e)
-		{
-			echo "Błąd serwera. Przepraszamy za niedogodności";
-			echo '<br /> Info dev.'.$e;
-		}
-
+		
 	}
-
 
 
 
@@ -92,18 +90,19 @@
 					</button>
 				  </div>
 				  <div class="modal-body">
-					<form>
+					<form action="balance_user_period.php" method="post">
 					  <div class="form-group">
 						<label class="col-form-label">Podaj zakres dat, którego ma dotyczyć bilans.</label>
-						<label>Od: <input type="date" class="form-control"></label>
-						<label>Do: <input type="date" class="form-control"></label>
+						<label>Od: <input type="date" class="form-control" name="date1"></label>
+						<label>Do: <input type="date" class="form-control" name="date2"></label>
+					  </div>
+					
+					  </div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Anuluj</button>
+						<button type="submir" class="btn btn-modal-ok">Akceptuj</button>
 					  </div>
 					</form>
-				  </div>
-				  <div class="modal-footer">
-					<button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Anuluj</button>
-					<button type="button" class="btn btn-modal-ok">Akceptuj</button>
-				  </div>
 				</div>
 			  </div>
 			</div>
@@ -153,8 +152,8 @@
 							<div class="dropdown-menu" aria-labelledby="submenu">
 							
 								<a class="dropdown-item" href="balance.php">Bieżący miesiąc</a>
-								<a class="dropdown-item" href="#">Poprzedni miesiąc</a>
-								<a class="dropdown-item" href="#">Bieżący rok</a>
+								<a class="dropdown-item" href="balance_previous_month.php">Poprzedni miesiąc</a>
+								<a class="dropdown-item" href="balance_present_year.php">Bieżący rok</a>
 								
 								<div class="dropdown-divider"></div>
 								
@@ -183,6 +182,23 @@
 			<div class="col-md-12">
 	
 				<form method="post">
+				
+					<?php 
+								
+						if (isset($_SESSION['e_add_income']))
+						{
+							unset($_SESSION['e_add_income']);
+							echo '<div class="error">'.$_SESSION['e_add_income'].'</div>';
+							
+						}
+						else if (isset($_SESSION['add_income_complete']))
+						{
+							unset($_SESSION['add_income_complete']);
+							echo '<div class="registration_complete">'.$_SESSION['add_income_complete'].'</div>';
+							
+						}
+					
+					?>
 		
 					<div id="title">Podaj dane:</div>
 
@@ -197,6 +213,7 @@
 						<?php	
 						
 						require_once "connect.php";
+						
 								
 						try
 						{
