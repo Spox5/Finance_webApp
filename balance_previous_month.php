@@ -116,18 +116,19 @@
 					</button>
 				  </div>
 				  <div class="modal-body">
-					<form>
+					<form action="balance_user_period.php" method="post">
 					  <div class="form-group">
 						<label class="col-form-label">Podaj zakres dat, którego ma dotyczyć bilans.</label>
-						<label>Od: <input type="date" class="form-control"></label>
-						<label>Do: <input type="date" class="form-control"></label>
+						<label>Od: <input type="date" class="form-control" name="date1"></label>
+						<label>Do: <input type="date" class="form-control" name="date2"></label>
 					  </div>
-					</form>
+					
 				  </div>
 				  <div class="modal-footer">
 					<button type="button" class="btn btn-modal-cancel" data-dismiss="modal">Anuluj</button>
-					<button type="button" class="btn btn-modal-ok">Akceptuj</button>
+					<button type="submit" class="btn btn-modal-ok">Akceptuj</button>
 				  </div>
+				  </form>
 				</div>
 			  </div>
 			</div>
@@ -290,27 +291,42 @@
 									}
 									else
 									{
-										$result = $connect->query("SELECT e_c.name, p_m.namem, e.amount, e.date_of_expense, e.expense_comment FROM expenses as e, payment_methods_assigned_to_users as p_m, expenses_category_assigned_to_users as e_c WHERE e.user_id = p_m.user_id AND e.user_id = e_c.user_id AND e.expense_category_assigned_to_user = e_c.id AND e.payment_method_assigned_to_user = p_m.id AND e.user_id=$_SESSION[user_id] AND (MONTH (e.date_of_expense) = $current_month - 1) ORDER BY date_of_expense DESC");
+										$result = $connect->query("SELECT e_c.name, p_m.name, e.amount, e.date_of_expense, e.expense_comment FROM expenses as e, payment_methods_assigned_to_users as p_m, expenses_category_assigned_to_users as e_c WHERE e.user_id = p_m.user_id AND e.user_id = e_c.user_id AND e.expense_category_assigned_to_user = e_c.id AND e.payment_method_assigned_to_user = p_m.id AND e.user_id=$_SESSION[user_id] AND (MONTH (e.date_of_expense) = $current_month - 1) ORDER BY date_of_expense DESC");
 										
 										$count = $result->num_rows;
 										
-										$result->fetch_assoc();
+										if (mysqli_num_rows($result) > 0)
+										{
+											while ($r = mysqli_fetch_array($result))
+											{
+												echo "<tr> \n";
+												echo "<td>$r[0]</td>";
+												echo "<td>$r[1]</td>";
+												echo "<td>$r[2] zł</td>";
+												echo "<td>$r[3]</td>";
+												echo "<td>$r[4]</td>";
+												echo "</tr> \n";
+											}
+										
+										/*$result->fetch_assoc();
 										
 										foreach($result as $data)
 										{
 											echo "<tr> \n";
 											echo "<td>$data[name]</td>";
-											echo "<td>$data[namem]</td>";
+											echo "<td>$data[name]</td>";
 											echo "<td>$data[amount] zł</td>";
 											echo "<td>$data[date_of_expense]</td>";
 											echo "<td>$data[expense_comment]</td>";
 											echo "</tr> \n";
-										}
+										}*/
 										
 										$connect->close();
 									}
 									
 								}
+								}
+								
 								catch (Exception $e)
 								{
 									echo "Błąd serwera. Przepraszamy za niedogodności";
@@ -349,12 +365,17 @@
 										{
 											echo "<div style='color: #00b33c'>Gratulacje! Świetnie zarządzasz finansami</div>";
 										}
+										else if ($balance == 0)
+										{
+											echo "<div style='color: #FFA500'>W tym okresie nie masz żadnych wydatków</div>";
+										}
 										else
 											echo "<div style='color: #e60000;'>Uważaj! Popadasz w długi</div>";																	
 										$connect->close();
 									}
 									
 								}
+								
 								catch (Exception $e)
 								{
 									echo "Błąd serwera. Przepraszamy za niedogodności";

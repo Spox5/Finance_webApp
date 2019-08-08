@@ -13,43 +13,41 @@
 		//income walidation ok
 		$all_ok = true;
 		
-		$logged_user_id = $_SESSION['user_id'];
-		$amount = $_POST['amount'];
-		$date = $_POST['date'];
-		$payment_method = $_POST['payment_method'];
-		$category = $_POST['category'];
-		$comment = $_POST['comment'];
-		
-		
 		require_once "connect.php";
 		
-		try
+		if (!empty($_POST['amount']) && !empty($_POST['date']) && isset($_POST['category']) && isset($_POST['payment_method']))
 		{
-			$connect = new mysqli($host, $db_user, $db_password, $db_name);
-			if ($connect->connect_errno!=0)
+			$logged_user_id = $_SESSION['user_id'];
+			$amount = $_POST['amount'];
+			$date = $_POST['date'];
+			$payment_method = $_POST['payment_method'];
+			$category = $_POST['category'];
+			$comment = $_POST['comment'];
+			
+			try
 			{
-				throw new Exception(mysqli_connect_errno());
-			}
-			else
-			{
-				if ($connect->query("INSERT INTO expenses VALUES(NULL, '$logged_user_id', '$payment_method', '$category','$amount' ,'$date', '$comment')"))
+				$connect = new mysqli($host, $db_user, $db_password, $db_name);
+				if ($connect->connect_errno!=0)
 				{
-					;
+					throw new Exception(mysqli_connect_errno());
 				}
-				
 				else
 				{
-					throw new Exception($connect->error);
+					$_SESSION['add_expense_complete'] = "Wydatek został dodany";
+					
+					$connect->query("INSERT INTO expenses VALUES(NULL, '$logged_user_id', '$category', '$payment_method','$amount' ,'$date', '$comment')");
+					
+					$connect->close();
+					
+					header('Location: add_expense.php');
 				}
 				
-				$connect->close();
 			}
-			
-		}
-		catch (Exception $e)
-		{
-			echo "Błąd serwera. Przepraszamy za niedogodności";
-			echo '<br /> Info dev.'.$e;
+			catch (Exception $e)
+			{
+				echo "Błąd serwera. Przepraszamy za niedogodności";
+				echo '<br /> Info dev.'.$e;
+			}
 		}
 
 	}
@@ -154,7 +152,7 @@
 							
 								<a class="dropdown-item" href="balance.php">Bieżący miesiąc</a>
 								<a class="dropdown-item" href="balance_previous_month.php">Poprzedni miesiąc</a>
-								<a class="dropdown-item" href="balance_user_period.php">Bieżący rok</a>
+								<a class="dropdown-item" href="balance_present_year.php">Bieżący rok</a>
 								
 								<div class="dropdown-divider"></div>
 								
@@ -207,7 +205,7 @@
 							}
 							else
 							{
-								$result = $connect->query("SELECT payment_methods_assigned_to_users.namem, payment_methods_assigned_to_users.id FROM payment_methods_assigned_to_users WHERE payment_methods_assigned_to_users.user_id=$_SESSION[user_id]" );
+								$result = $connect->query("SELECT payment_methods_assigned_to_users.name, payment_methods_assigned_to_users.id FROM payment_methods_assigned_to_users WHERE payment_methods_assigned_to_users.user_id=$_SESSION[user_id]" );
 								
 								$count = $result->num_rows;
 								
@@ -215,7 +213,7 @@
 								
 								foreach($result as $data)
 								{
-									echo "<div><label><input type='radio' name='payment_method' value=$data[id]>$data[namem]</label></div>";
+									echo "<div><label><input type='radio' name='payment_method' value=$data[id]>$data[name]</label></div>";
 								}
 								
 								$connect->close();

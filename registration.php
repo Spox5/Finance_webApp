@@ -21,7 +21,7 @@
 		if (ctype_alnum($username_reg) == false)
 		{
 			$all_ok = false;
-			$_SESSION['e_username_reg'] = "Login może składać się tylko liter (bez polskich znaków) i cyfr";
+			$_SESSION['e_username_reg'] = "Login może składać się tylko z liter (bez polskich znaków) i cyfr";
 			header('Location: index.php');
 		}
 		
