@@ -39,7 +39,7 @@
 					
 					$connect->close();
 					
-					header('Location: add_income.php');
+					
 				}
 				
 			}
@@ -48,6 +48,10 @@
 				echo "Błąd serwera. Przepraszamy za niedogodności";
 				echo '<br /> Info dev.'.$e;
 			}
+		}
+		else
+		{
+			$_SESSION['e_add_income'] = "Wypełnij niezbędne pola.";
 		}
 		
 	}
@@ -187,15 +191,15 @@
 								
 						if (isset($_SESSION['e_add_income']))
 						{
-							unset($_SESSION['e_add_income']);
-							echo '<div class="error">'.$_SESSION['e_add_income'].'</div>';
 							
+							echo '<div class="error">'.$_SESSION['e_add_income'].'</div>';
+							unset($_SESSION['e_add_income']);
 						}
 						else if (isset($_SESSION['add_income_complete']))
 						{
-							unset($_SESSION['add_income_complete']);
-							echo '<div class="registration_complete">'.$_SESSION['add_income_complete'].'</div>';
 							
+							echo '<div class="registration_complete">'.$_SESSION['add_income_complete'].'</div>';
+							unset($_SESSION['add_income_complete']);
 						}
 					
 					?>

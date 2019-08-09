@@ -39,7 +39,6 @@
 					
 					$connect->close();
 					
-					header('Location: add_expense.php');
 				}
 				
 			}
@@ -48,6 +47,10 @@
 				echo "Błąd serwera. Przepraszamy za niedogodności";
 				echo '<br /> Info dev.'.$e;
 			}
+		}
+		else
+		{
+			$_SESSION['e_add_expense'] = "Wypełnij niezbędne pola.";
 		}
 
 	}
@@ -181,6 +184,23 @@
 			<div class="col-md-12">
 	
 				<form method="post">
+				
+					<?php 
+								
+						if (isset($_SESSION['e_add_expense']))
+						{
+							
+							echo '<div class="error">'.$_SESSION['e_add_expense'].'</div>';
+							unset($_SESSION['e_add_expense']);
+						}
+						else if (isset($_SESSION['add_expense_complete']))
+						{
+							
+							echo '<div class="registration_complete">'.$_SESSION['add_expense_complete'].'</div>';
+							unset($_SESSION['add_expense_complete']);
+						}
+					
+					?>
 		
 					<div id="title">Podaj dane:</div>
 
