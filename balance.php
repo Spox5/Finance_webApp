@@ -15,6 +15,7 @@
 	require_once "connect.php";
 	$current_month = date('m');
 	
+	
 	try
 	
 	{
@@ -280,6 +281,7 @@
 								require_once "connect.php";
 								$current_month = date('m');
 								
+								
 								try
 								{
 									$connect = new mysqli($host, $db_user, $db_password, $db_name);
@@ -293,10 +295,15 @@
 										
 										$count = $result->num_rows;
 										
+										$_SESSION['piechart_visible'] = false;
+										
 										if (mysqli_num_rows($result) > 0)
 										{
+											$_SESSION['piechart_visible'] = true;
+											
 											while ($r = mysqli_fetch_array($result))
 											{
+												
 												echo "<tr> \n";
 												echo "<td>$r[0]</td>";
 												echo "<td>$r[1]</td>";
@@ -305,19 +312,6 @@
 												echo "<td>$r[4]</td>";
 												echo "</tr> \n";
 											}
-										
-										/*$result->fetch_assoc();
-										
-										foreach($result as $data)
-										{
-											echo "<tr> \n";
-											echo "<td>$data[name]</td>";
-											echo "<td>$data[name]</td>";
-											echo "<td>$data[amount] zł</td>";
-											echo "<td>$data[date_of_expense]</td>";
-											echo "<td>$data[expense_comment]</td>";
-											echo "</tr> \n";
-										}*/
 										
 										$connect->close();
 										}
@@ -382,8 +376,14 @@
 								
 						</div>
 		
-						<div class = "expense_chart" id="piechart"></div>
-		
+						<?php
+						
+						if ($_SESSION['piechart_visible'] == true)
+						{
+							echo "<div class = 'expense_chart' id='piechart'></div>";
+						}
+						
+						?>
 					</div>
 			
 				</div>

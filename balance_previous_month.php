@@ -295,8 +295,12 @@
 										
 										$count = $result->num_rows;
 										
+										$_SESSION['piechart_visible'] = false;
+										
 										if (mysqli_num_rows($result) > 0)
 										{
+											$_SESSION['piechart_visible'] = true;
+											
 											while ($r = mysqli_fetch_array($result))
 											{
 												echo "<tr> \n";
@@ -308,23 +312,10 @@
 												echo "</tr> \n";
 											}
 										
-										/*$result->fetch_assoc();
-										
-										foreach($result as $data)
-										{
-											echo "<tr> \n";
-											echo "<td>$data[name]</td>";
-											echo "<td>$data[name]</td>";
-											echo "<td>$data[amount] zł</td>";
-											echo "<td>$data[date_of_expense]</td>";
-											echo "<td>$data[expense_comment]</td>";
-											echo "</tr> \n";
-										}*/
-										
-										$connect->close();
-									}
+											$connect->close();
+										}
 									
-								}
+									}
 								}
 								
 								catch (Exception $e)
@@ -386,7 +377,14 @@
 								
 						</div>
 		
-						<div class = "expense_chart" id="piechart"></div>
+						<?php
+						
+						if ($_SESSION['piechart_visible'] == true)
+						{
+							echo "<div class = 'expense_chart' id='piechart'></div>";
+						}
+						
+						?>
 		
 					</div>
 			
