@@ -293,10 +293,13 @@
 									{
 										$result = $connect->query("SELECT e_c.name, p_m.name, e.amount, e.date_of_expense, e.expense_comment FROM expenses as e, payment_methods_assigned_to_users as p_m, expenses_category_assigned_to_users as e_c WHERE e.user_id = p_m.user_id AND e.user_id = e_c.user_id AND e.expense_category_assigned_to_user = e_c.id AND e.payment_method_assigned_to_user = p_m.id AND e.user_id=$_SESSION[user_id] AND (YEAR (e.date_of_expense) = $current_year) ORDER BY date_of_expense DESC");
 										
-										
+										$_SESSION['piechart_visible'] = false;
 										
 										if (mysqli_num_rows($result) > 0)
 										{
+											
+											$_SESSION['piechart_visible'] = true;
+											
 											while ($r = mysqli_fetch_array($result))
 											{
 												echo "<tr> \n";
@@ -308,23 +311,10 @@
 												echo "</tr> \n";
 											}
 										
-										/*$result->fetch_assoc();
-										
-										foreach($result as $data)
-										{
-											echo "<tr> \n";
-											echo "<td>$data[name]</td>";
-											echo "<td>$data[name]</td>";
-											echo "<td>$data[amount] zł</td>";
-											echo "<td>$data[date_of_expense]</td>";
-											echo "<td>$data[expense_comment]</td>";
-											echo "</tr> \n";
-										}*/
-										
 										$connect->close();
-									}
+										}
 									
-								}
+									}
 								}
 								catch (Exception $e)
 								{
@@ -384,7 +374,14 @@
 								
 						</div>
 		
-						<div class = "expense_chart" id="piechart"></div>
+						<?php
+						
+						if ($_SESSION['piechart_visible'] == true)
+						{
+							echo "<div class = 'expense_chart' id='piechart'></div>";
+						}
+						
+						?>
 		
 					</div>
 			
