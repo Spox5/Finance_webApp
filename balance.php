@@ -15,7 +15,6 @@
 	require_once "connect.php";
 	$current_month = date('m');
 	
-	
 	try
 	
 	{
@@ -89,11 +88,11 @@
 ;
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
 		
 			chart.draw(data, options);
 		
-      }
+		}
+		
     </script>
 	
 	
@@ -289,7 +288,6 @@
 								require_once "connect.php";
 								$current_month = date('m');
 								
-								
 								try
 								{
 									$connect = new mysqli($host, $db_user, $db_password, $db_name);
@@ -315,7 +313,6 @@
 											
 											while ($r = mysqli_fetch_array($result))
 											{
-												
 												echo "<tr> \n";
 												echo "<td>$r[0]</td>";
 												echo "<td>$r[1]</td>";
